@@ -10,6 +10,7 @@ bash install/grafana.sh
 bash install/nginx.sh
 bash install/kvrocks_exporter.sh
 bash install/kvrocks.sh
+bash install/memtier_benchmark.sh
 
 echo "begin setup private nodes ..."
 bash copy_to_node.sh
