@@ -12,6 +12,7 @@ bash install/kvrocks_exporter.sh
 bash install/cmake.sh
 bash install/kvrocks.sh
 bash install/memtier_benchmark.sh
+bash install/redis.sh
 
 echo "begin setup private nodes ..."
 bash copy_to_node.sh
