@@ -8,5 +8,5 @@ if [ ! -d incubator-kvrocks ]; then
 fi
 
 cd incubator-kvrocks
-./x.py build
+./x.py build -j`nproc`
 cd build && tar zcf kvrocks.tar.gz kvrocks && cp kvrocks.tar.gz /var/www/html/
