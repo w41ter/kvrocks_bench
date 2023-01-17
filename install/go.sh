@@ -8,4 +8,4 @@ rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
 if ! grep "/go/bin" ~/.bashrc; then
     echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.bashrc
 fi
-
+ln -s /usr/local/go/bin/go /usr/bin/go
