@@ -27,7 +27,7 @@ sudo cp -r prometheus-${version}.linux-amd64/consoles /etc/prometheus
 sudo cp -r prometheus-${version}.linux-amd64/console_libraries /etc/prometheus
 rm -rf prometheus-${version}.linux-amd64
 
-SERVERS=$(printf ",'kvrocks://%s:${KVROCKS_PORT}'" "${HOST_KVROCKS_NODES[@]}")
+SERVERS=$(printf ",'%s:9121'" "${HOST_KVROCKS_NODES[@]}")
 NODE_SERVERS=$(printf ",'%s:9100'" "${HOST_KVROCKS_NODES[@]}")
 cat >/etc/prometheus/prometheus.yml <<EOF
 global:
@@ -39,23 +39,10 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'kvrocks_exporter_targets'
-    static_configs:
-      - targets: [${SERVERS:1}]
-    metrics_path: /scrape
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: ${HOST_CENTRAL}:9121
-
   ## config for scraping the exporter itself
   - job_name: 'kvrocks_exporter'
     static_configs:
-      - targets:
-        - ${HOST_CENTRAL}:9121
+      - targets: [${SERVERS:1}]
 
   - job_name: 'node exporter'
     static_configs:

@@ -85,8 +85,13 @@ function build_scripts() {
     cat >${WDR}/scripts/run.sh <<EOF
 #!/bin/bash
 
+# enable kvrocks exporter
+pkill kvrocks_exporter
+setsid /root/kvrocks_exporter >/var/log/kvrocks-exporter.log 2>&1 &
+
 ${ENABLE_TCMALLOC_TEXT}
 export TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES=${TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES:-1073741824}
+
 cd ${WDR}
 exec ${WDR}/bin/kvrocks -c ${WDR}/kvrocks.conf >${WDR}/log 2>&1
 
