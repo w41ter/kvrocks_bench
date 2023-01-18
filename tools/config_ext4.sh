@@ -29,7 +29,7 @@ cp /etc/fstab /etc/fstab.bak
 
 for DEV in $( mount | grep ext4 | awk '{print $1}' | fgrep /dev/ ); do
     PUREDEV=$( echo $DEV | cut -d/ -f3- )
-    UUIDIS=$( ls -l /dev/disk/by-uuid/ | fgrep $PUREDEV | awk '{print $9}' )
+    UUIDIS=$( ls -l /dev/disk/by-uuid/ | grep "$PUREDEV\$" | awk '{print $9}' )
     remount ${PUREDEV}
     sed -i "/${UUIDIS}/d" /etc/fstab
     left=$(cat /etc/mtab | grep ${DEV} | awk '{ $1=""; print $0 }')
