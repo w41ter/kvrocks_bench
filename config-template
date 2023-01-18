@@ -1,4 +1,5 @@
 USER=root
+AWS_USER=admin
 
 # base mountpoint of tikv nodes
 MOUNT=
