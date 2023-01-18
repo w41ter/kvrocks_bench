@@ -19,6 +19,7 @@ cat >${WDR}/kvrocks.conf <<EOF
 # daemonize yes
 logbuflevel 0
 minloglevel 0
+bind 0.0.0.0
 port ${KVROCKS_PORT}
 cluster-enabled ${CLUSTER_MODE:-no}
 log-dir ${WDR}/log/
