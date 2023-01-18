@@ -17,6 +17,6 @@ ssh ${USER}@${HOST_CENTRAL} "\
 NODES=( ${HOST_KVROCKS_NODES[*]} ); \
 for node in \${NODES[@]}; do \
     scp -r mount_local_ssd.sh ${USER}@\${node}:~ ; \
-    ssh ${USER}@\${node} 'bash mount_local_ssd.sh vdb mnt' </dev/null; \
+    ssh ${USER}@\${node} 'bash mount_local_ssd.sh ${DEVICE} ${MOUNT}' </dev/null; \
 done \
 "

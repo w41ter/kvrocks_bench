@@ -27,12 +27,14 @@ partprobe
 # display partition info.
 fdisk -lu /dev/${DEV}
 
+DEV_PARTITION=`fdisk -lu /dev/${DEV} | awk '/Linux filesystem/{device=1} END{print $device}'`
+
 # make file system for partition.
-mkfs -t ext4 /dev/${DEV}1
+yes | mkfs -t ext4 ${DEV_PARTITION}
 
 cp /etc/fstab /etc/fstab.bak.mount.${DEV}
 
-echo $(blkid /dev/${DEV}1 | awk '{print $2}' | sed 's/\"//g') /${POINT} ext4 defaults 0 0 >>/etc/fstab
+echo $(blkid ${DEV_PARTITION} | awk '{print $2}' | sed 's/\"//g') /${POINT} ext4 defaults 0 0 >>/etc/fstab
 
 cat /etc/fstab
 mount -a
