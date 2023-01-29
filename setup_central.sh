@@ -14,6 +14,12 @@ bash install/kvrocks.sh
 bash install/memtier_benchmark.sh
 bash install/redis.sh
 
+echo "setup grafana ..."
+curl --user admin:admin 'http://localhost:3000/api/datasources' \
+    -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    --data-binary '{"name":"prometheus","isDefault":true,"type":"prometheus","url":"http://localhost:9090","access":"proxy","basicAuth":false}'
+
 echo "begin setup private nodes ..."
 bash copy_to_node.sh
 
