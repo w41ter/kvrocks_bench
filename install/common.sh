@@ -20,7 +20,8 @@ sudo apt-get install -y \
     sshpass \
     numactl \
     tar \
-    jq
+    jq \
+    lsof
 
 # install monitors
 # - htop
