@@ -10,7 +10,7 @@ EOF"
 if [ ! -z $AWS_USER ]; then
     echo "Need enable ${USER} login for AWS server"
 
-    ssh ${AWS_USER}@${HOST_CENTRAL} "${allow_login_commands}"
+    ssh -o StrictHostKeyChecking=no ${AWS_USER}@${HOST_CENTRAL} "${allow_login_commands}"
 fi
 
 # Install rsa keys
@@ -39,8 +39,10 @@ for host in ${HOSTS[@]}; do
 
     # allow root login
     if [ ! -z ${AWS_USER} ]; then
-        ssh -J ${USER}@${HOST_CENTRAL} ${AWS_USER}@${host} "${allow_login_commands}" </dev/null
+        ssh -o StrictHostKeyChecking=no -J ${USER}@${HOST_CENTRAL} \
+            ${AWS_USER}@${host} "${allow_login_commands}" </dev/null
     fi
 
-	ssh-copy-id -i id_rsa.pub -o StrictHostKeyChecking=no -o ProxyJump=${USER}@${HOST_CENTRAL} ${USER}@${host} </dev/null
+	ssh-copy-id -i id_rsa.pub -o StrictHostKeyChecking=no \
+        -o ProxyJump=${USER}@${HOST_CENTRAL} ${USER}@${host} </dev/null
 done
