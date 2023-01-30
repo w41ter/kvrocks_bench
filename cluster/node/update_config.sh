@@ -16,7 +16,7 @@ if [ -e ${WDR}/kvrocks.conf ]; then
 fi
 
 # Config descriptions:
-# - block cache: 32GB, shared by subkey and metadata.
+# - block cache: 48GB, shared by subkey and metadata.
 # - enable dynamic level bytes
 # - disable wal
 # - no compression
@@ -38,6 +38,7 @@ rocksdb.level0_slowdown_writes_trigger 128
 rocksdb.level0_stop_writes_trigger 512
 rocksdb.level_compaction_dynamic_level_bytes yes
 rocksdb.share_metadata_and_subkey_block_cache yes
-rocksdb.subkey_block_cache_size 32768
-rocksdb.metadata_block_cache_size 32768
+rocksdb.subkey_block_cache_size 24576
+rocksdb.metadata_block_cache_size 24576
+rocksdb.write_options.disable_wal ${KVROCKS_DISABLE_WAL:-yes}
 EOF
