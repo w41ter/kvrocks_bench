@@ -93,6 +93,7 @@ ${ENABLE_TCMALLOC_TEXT}
 export TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES=${TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES:-1073741824}
 
 cd ${WDR}
+mkdir -p ${WDR}/log/
 exec ${WDR}/bin/kvrocks -c ${WDR}/kvrocks.conf >${WDR}/stdout 2>&1
 
 EOF
