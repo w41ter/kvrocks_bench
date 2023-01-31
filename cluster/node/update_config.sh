@@ -40,5 +40,6 @@ rocksdb.level_compaction_dynamic_level_bytes yes
 rocksdb.share_metadata_and_subkey_block_cache yes
 rocksdb.subkey_block_cache_size 24576
 rocksdb.metadata_block_cache_size 24576
-rocksdb.write_options.disable_wal ${KVROCKS_DISABLE_WAL:-yes}
+rocksdb.write_options.disable_wal ${KVROCKS_DISABLE_WAL:-no}
+rocksdb.write_options.sync ${KVROCKS_WRITE_SYNC:-no}
 EOF
