@@ -21,7 +21,8 @@ sudo apt-get install -y \
     numactl \
     tar \
     jq \
-    lsof
+    lsof \
+    bc
 
 # install monitors
 # - htop
